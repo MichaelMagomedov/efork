@@ -71,9 +71,35 @@ class LocationProvider implements Base
 
 ```
 #Ioc
+
 ```javascript 
 
-$this->components()->make(SomeClass::class);
+$app->components()->make(SomeClass::class);
+
+```
+
+#Controller
+
+
+```javascript 
+
+use Engine\Implementations\App;
+
+class UserController
+{
+
+    private $app;
+
+    public function __construct(App $app)
+    {
+        $this->app = $app;
+    }
+
+    public function index($id)
+    {
+      --some code--
+    }
+}
 
 ```
    

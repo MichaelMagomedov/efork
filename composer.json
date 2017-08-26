@@ -1,5 +1,5 @@
 {
-  "name": "mikl778890/efork",
+  "name": "efork",
   "type": "library",
   "description": "custom mini php framework",
   "keywords": [
@@ -14,11 +14,9 @@
       "email": "mikl778890@yandex.ru"
     }
   ],
-
   "autoload": {
     "psr-4": {
       "Engine\\": "engine"
     }
   }
-
 }

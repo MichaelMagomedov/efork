@@ -16,7 +16,8 @@
   ],
   "autoload": {
     "psr-4": {
-      "Engine\\": "stc/Engine"
+      "Foo\\Engine": "src/Engine/"
     }
   }
 }
+

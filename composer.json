@@ -1,9 +1,11 @@
 {
-  "name": "Магомедов Михаил 11-408",
-  "description": "Проект для сдачи экзамена по php",
-  "version": "dev-1",
-  "license": "mit",
-
+  "name": "kfu/efork",
+  "type": "library",
+  "description": "Composer package by DataArt",
+  "license": "MIT",
+  "require": {
+    "php": ">=7.0.0",
+  },
   "autoload": {
     "psr-4": {
       "Engine\\": "engine/"

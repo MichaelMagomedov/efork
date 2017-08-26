@@ -3,6 +3,7 @@
   "description": "Проект для сдачи экзамена по php",
   "version": "dev-1",
   "license": "mit",
+
   "autoload": {
     "psr-4": {
       "Engine\\": "engine/"

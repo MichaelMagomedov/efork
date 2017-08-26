@@ -1,6 +1,6 @@
 <?php
 
-namespace Engine\Implementation;
+namespace Engine\Implementations;
 
 use Engine\Implementations\Component\Storage as StorageComponents;
 use Engine\Implementations\Provider\Storage as StorageProviders;

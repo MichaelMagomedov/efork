@@ -1,11 +1,24 @@
 {
-  "name": "kfu/efork",
+  "name": "mikl778890/efork",
   "type": "library",
-  "description": "Composer package by DataArt",
+  "description": "custom mini php framework",
+  "keywords": [
+    "php",
+    "11-408"
+  ],
+  "homepage": "https://github.com/mikl778890/efork",
   "license": "MIT",
+  "authors": [
+    {
+      "name": "mikl",
+      "email": "mikl778890@yandex.ru",
+    }
+  ],
   "autoload": {
     "psr-4": {
-      "Engine\\": "engine/"
+      "Engine\\": "engine"
     }
-  }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }

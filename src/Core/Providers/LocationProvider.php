@@ -12,7 +12,7 @@ class LocationProvider implements Base
 
     public function inject(App $app)
     {
-        $app->components()->singleton(Location::class, function ($app) {
+        $app->components()->add(Location::class, function ($app) {
             return new \Engine\Implementations\Route\Location($app);
         });
     }

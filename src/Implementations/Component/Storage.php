@@ -40,7 +40,7 @@ class Storage implements Contract
 
         } else {
 
-            return $this->components[$asscoiation][$class]();
+            return call_user_func($this->components[$asscoiation][$class],$this->app);
 
         }
     }

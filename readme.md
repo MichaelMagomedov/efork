@@ -70,7 +70,7 @@ class LocationProvider implements Base
 }
 
 ```
-#Ioc
+# Ioc
 
 ```javascript 
 
@@ -78,7 +78,7 @@ $app->components()->make(SomeClass::class);
 
 ```
 
-#Controller
+# Controller
 
 
 ```javascript 

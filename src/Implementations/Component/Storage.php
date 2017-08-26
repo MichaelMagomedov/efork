@@ -8,7 +8,13 @@ use \Engine\Contracts\Component\Storage as Contract;
 class Storage implements Contract
 {
 
-    private $components = [];
+    private $association = [
+
+    ];
+    private $components = [
+
+    ];
+
     private $app;
 
     /**
@@ -24,17 +30,41 @@ class Storage implements Contract
     }
 
 
-    function make(string $class):\ReflectionObject
+    public function make(string $class)
     {
-        return $this->components[$class];
+        $asscoiation = $this->association[$class];
+
+        if ($asscoiation == "singleton") {
+
+            return $this->components[$asscoiation][$class];
+
+        } else {
+
+            return $this->components[$asscoiation][$class]();
+
+        }
     }
 
-    function add(string $class, $function):\ReflectionObject
+    public function add(string $class, $function)
     {
+        $this->association[$class] = "item";
+        $this->components["item"][$class] = $function;
+    }
 
+    public function singleton(string $class, $function)
+    {
+        $this->association[$class] = "singleton";
         $obj = $function($this->app);
+        $this->components["singleton"][$class] = $obj;
+    }
 
-        $this->components[$class] = $obj;
+    public function all():array
+    {
+        return $this->components;
+    }
 
+    public function assotiation():array
+    {
+        return $this->association;
     }
 }

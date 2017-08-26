@@ -3,16 +3,17 @@
 namespace Engine\Contracts;
 
 use Engine\Contracts\Provider\Storage as ProvidersStorage;
-use Engine\Contracts\Provider\Storage as ComponentsStorage;
+use Engine\Contracts\Component\Storage as ComponentsStorage;
+use Engine\Contracts\Route\Storage as RouteStorage;
 
 interface App
 {
     function start();
 
-    function make(string $class);
-
     function providers():ProvidersStorage;
 
     function components():ComponentsStorage;
+
+    function routes():RouteStorage;
 
 }

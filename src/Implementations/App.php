@@ -2,8 +2,20 @@
 
 namespace Engine\Implementations;
 
-use Engine\Implementations\Component\Storage as StorageComponents;
-use Engine\Implementations\Provider\Storage as StorageProviders;
+use Engine\Contracts\Request\Request;
+use Engine\Contracts\Route\Location;
+use Engine\Implementations\Component\Storage as StorageComponentsImpl;
+
+use Engine\Implementations\Provider\Storage as StorageProvidersImpl;
+
+use Engine\Implementations\Route\Storage as StorageRoutesImpl;
+
+use Engine\Contracts\Component\Storage as StorageComponents;
+
+use Engine\Contracts\Provider\Storage as StorageProviders;
+
+use Engine\Contracts\Route\Storage as StorageRoutes;
+
 use \Engine\Contracts\App as Contract;
 
 class App implements Contract
@@ -13,40 +25,50 @@ class App implements Contract
 
     private $components;
 
+    private $routes;
+
+
     /**
      * App constructor.
      * @param array $providers
      */
-    public function __construct()
+    function __construct()
     {
 
-        $this->providers = new StorageProviders($this);
+        $this->providers = new StorageProvidersImpl($this);
 
-        $this->components = new StorageComponents($this);
+        $this->components = new StorageComponentsImpl($this);
+
+        $this->routes = new StorageRoutesImpl();
 
     }
 
 
     function start()
     {
+     
         $this->providers()->register();
+     
+        $request = $this->components()->make(Request::class);
+     
+        $location = $this->components()->make(Location::class);
+     
+        return $location->location($request->uri());
     }
 
-    function components()
+    function components():StorageComponents
     {
         return $this->components;
     }
 
-    function providers():StorageProviders
+    function routes():StorageRoutes
     {
-        return $this->providers();
+        return $this->routes;
     }
 
-    function make(string $class)
+    function providers():StorageProviders
     {
-
-        return $this->components[$class];
-
+        return $this->providers;
     }
 
 

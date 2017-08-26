@@ -5,8 +5,8 @@ namespace Engine\Contracts\Provider;
 interface Storage
 {
 
-    function add(string $class);
+    public function add(string $class);
     
-    function register();
+    public function register();
 
 }

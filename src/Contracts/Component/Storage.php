@@ -3,7 +3,13 @@ namespace Engine\Contracts\Component;
 
 interface Storage
 {
-    function make(string $class):\ReflectionObject;
+    public function make(string $class);
 
-    function add(string $class, $function):\ReflectionObject;
+    public function add(string $class, $function);
+
+    public function singleton(string $class, $function);
+
+    public function all():array;
+
+    public function assotiation():array;
 }

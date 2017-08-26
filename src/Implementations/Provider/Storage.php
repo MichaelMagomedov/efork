@@ -20,13 +20,13 @@ class Storage implements Contract
         $this->app = $app;
     }
 
-    public function add(string $provider):bool
+    public function add(string $provider)
     {
-        array_push($this->providers, new \ReflectionObject($provider));
+        array_push($this->providers, (new \ReflectionClass($provider))->newInstance());
     }
 
 
-    function register()
+    public function register()
     {
         foreach ($this->providers as $provider) {
             $provider->inject($this->app);

@@ -1,0 +1,11 @@
+{
+  "name": "Магомедов Михаил 11-408",
+  "description": "Проект для сдачи экзамена по php",
+  "version": "1.0",
+  "license": "mit",
+  "autoload": {
+    "psr-4": {
+      "Engine\\": "engine/"
+    }
+  }
+}

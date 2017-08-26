@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Engine\Install;
 
 use Composer\Script\Event;

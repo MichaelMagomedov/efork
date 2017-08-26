@@ -25,17 +25,56 @@
     RewriteRule ^(.*)$ index.php [QSA,L
 </IfModule>
 ```
-# index.php                                      
+# index.php   
+                                   
 ```javascript 
+
 <?php
+
     require __DIR__ . '/../vendor/autoload.php';
+    
     use Engine\Core\Providers\LocationProvider;
     use Engine\Core\Providers\RequestProvider;
     use Engine\Implementations\App;
+
     $app = new App();
     $app->providers()->add(RequestProvider::class);
     $app->providers()->add(LocationProvider::class);
-    $app->routes()->add("/user/{id}", \App\Controllers\UserController::class, "index");
+
     $app->start();
 
 ```
+
+# Example
+
+# Routing
+```javascript 
+
+$app->routes()->add("/user/{id}", \App\Controllers\UserController::class, "index");
+
+```
+
+#Provider
+
+```javascript 
+
+class LocationProvider implements Base
+{
+
+    public function inject(App $app)
+    {
+        $app->components()->singleton(Interface::class, function ($app) {
+            return new Implementation($app);
+        });
+    }
+}
+
+```
+#Ioc
+```javascript 
+
+$this->components()->make(SomeClass::class);
+
+```
+   
+

@@ -50,7 +50,7 @@
 # Routing
 ```javascript 
 
-$app->routes()->add("/user/{id}", \App\Controllers\UserController::class, "index");
+$app->routes()->add("GET","/user/{id}", \App\Controllers\UserController::class, "index");
 
 ```
 

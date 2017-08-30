@@ -9,17 +9,55 @@ class Storage implements Contract
 {
 
     private $routes = [
-
+        'GET' => [],
+        'POST' => []
     ];
 
-    public function add(string $route, string $controller, string $method)
+    protected function checkMethodType(string $method):bool
     {
-        $routeObj = new Route($route, $controller, $method);
-        $this->routes[$routeObj->getRegex()] = $routeObj;
+
+        $methodObj = $this->routes[strtoupper($method)];
+
+        if (isset($methodObj)) {
+
+            return true;
+
+        }
+
+        return false;
     }
 
-    public function all()
+    protected function exception()
     {
-        return $this->routes;
+
+        throw new \Exception("Method type not registred or not permission");
+
+    }
+
+    public function add(string $method, string $route, string $controller, string $action)
+    {
+        $routeObj = new Route($route, $controller, $action);
+
+        if ($this->checkMethodType($method) == true) {
+
+            $this->routes[strtoupper($method)][$routeObj->getRegex()] = $routeObj;
+
+        } else {
+
+            $this->exception();
+
+        }
+    }
+
+    public function all(string $method):array
+    {
+        if ($this->checkMethodType($method) == true) {
+
+            return $this->routes[$method];
+
+        }
+
+        $this->exception();
+
     }
 }

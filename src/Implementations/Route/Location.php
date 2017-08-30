@@ -20,17 +20,21 @@ class Location implements Contract
 
     public function location(string $uri)
     {
-        $routes = $this->app->routes()->all();
+        $routes = $this->app->routes()->all($_SERVER['REQUEST_METHOD']);
 
         foreach ($routes as $regex => $route) {
+
             $routePart = null;
+
             if (preg_match($regex, $uri, $routePart) == true) {
 
                 $variable = [];
                 foreach ($routePart as $key => $value) {
+
                     if (is_string($key)) {
                         array_push($variable, $value);
                     }
+
                 }
                 $controllerObj = (new \ReflectionClass($route->getController()))->newInstance($this->app);
 
@@ -38,6 +42,8 @@ class Location implements Contract
 
             }
         }
+
+        throw new \Exception("Method not allowed");
 
 
     }

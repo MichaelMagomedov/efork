@@ -16,8 +16,8 @@ class Request implements Contract
         }
     }
 
-    public function uri():string
+    public function url():string
     {
-        return $_SERVER["REQUEST_URI"];
+        return strtok($_SERVER["REQUEST_URI"], '?');
     }
 }

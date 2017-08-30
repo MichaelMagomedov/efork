@@ -5,5 +5,5 @@ interface Request
 {
     public function input(string $string):string;
     
-    public function uri():string;
+    public function url():string;
 }

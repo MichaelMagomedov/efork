@@ -3,6 +3,6 @@ namespace Engine\Contracts\Route;
 
 interface Location
 {
-    public function location(string $uri);
+    public function location(string $url);
 
 }

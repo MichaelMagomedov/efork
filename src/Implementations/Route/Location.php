@@ -18,7 +18,7 @@ class Location implements Contract
         $this->app = $app;
     }
 
-    public function location(string $uri)
+    public function location(string $url)
     {
         $method = $_SERVER['REQUEST_METHOD'];
 
@@ -28,7 +28,7 @@ class Location implements Contract
 
             $routePart = null;
 
-            if (preg_match($regex, $uri, $routePart) == true) {
+            if (preg_match($regex, $url, $routePart) == true) {
 
                 $middlewares = $this->app->middlewares()->getMidddlewares($method, $regex);
 

@@ -79,7 +79,8 @@ $app->middlewares()->add("auth", \App\Middlewares\IndexMiddleware::class);
 
 ```
 
-#Provider
+
+# Provider
 
 ```javascript 
 

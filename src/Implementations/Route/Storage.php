@@ -34,13 +34,18 @@ class Storage implements Contract
 
     }
 
-    public function add(string $method, string $route, string $controller, string $action)
+    public function add(string $method, string $route, string $controller, string $action):array 
     {
         $routeObj = new Route($route, $controller, $action);
 
         if ($this->checkMethodType($method) == true) {
 
             $this->routes[strtoupper($method)][$routeObj->getRegex()] = $routeObj;
+
+            return [
+                "METHOD" => $method,
+                "REGEX" => $routeObj->getRegex()
+            ];
 
         } else {
 

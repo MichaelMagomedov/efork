@@ -48,9 +48,34 @@
 # Example
 
 # Routing
+
 ```javascript 
 
 $app->routes()->add("GET","/user/{id}", \App\Controllers\UserController::class, "index");
+
+$app->middlewares()->uriRegister(["auth"], [
+    $app->routes()->add("GET", "/", \App\Controllers\UserController::class, "index")
+]);
+
+```
+# Middlewares
+
+```javascript 
+
+use Engine\Contracts\App;
+use Engine\Contracts\Middleware\Base;
+
+class IndexMiddleware implements Base
+{
+
+    public function handle(App $app)
+    {
+     
+    }
+}
+
+
+$app->middlewares()->add("auth", \App\Middlewares\IndexMiddleware::class);
 
 ```
 

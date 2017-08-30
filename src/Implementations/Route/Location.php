@@ -20,7 +20,9 @@ class Location implements Contract
 
     public function location(string $uri)
     {
-        $routes = $this->app->routes()->all($_SERVER['REQUEST_METHOD']);
+        $method = $_SERVER['REQUEST_METHOD'];
+
+        $routes = $this->app->routes()->all($method);
 
         foreach ($routes as $regex => $route) {
 
@@ -28,7 +30,16 @@ class Location implements Contract
 
             if (preg_match($regex, $uri, $routePart) == true) {
 
+                $middlewares = $this->app->middlewares()->getMidddlewares($method, $regex);
+
+                for ($i = 0; $i < sizeof($middlewares); $i++) {
+
+                    $middlewares[$i]->handle($this->app);
+
+                }
+
                 $variable = [];
+
                 foreach ($routePart as $key => $value) {
 
                     if (is_string($key)) {
@@ -36,6 +47,7 @@ class Location implements Contract
                     }
 
                 }
+
                 $controllerObj = (new \ReflectionClass($route->getController()))->newInstance($this->app);
 
                 return call_user_func_array(array($controllerObj, $route->getMethod()), $variable);

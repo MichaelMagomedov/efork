@@ -10,11 +10,16 @@ use Engine\Implementations\Provider\Storage as StorageProvidersImpl;
 
 use Engine\Implementations\Route\Storage as StorageRoutesImpl;
 
+use Engine\Implementations\Middleware\Storage as StorageMiddlewareImpl;
+
 use Engine\Contracts\Component\Storage as StorageComponents;
 
 use Engine\Contracts\Provider\Storage as StorageProviders;
 
 use Engine\Contracts\Route\Storage as StorageRoutes;
+
+use Engine\Contracts\Middleware\Storage as StorageMiddleware;
+
 
 use \Engine\Contracts\App as Contract;
 
@@ -26,6 +31,8 @@ class App implements Contract
     private $components;
 
     private $routes;
+
+    private $middlewares;
 
 
     /**
@@ -41,18 +48,20 @@ class App implements Contract
 
         $this->routes = new StorageRoutesImpl();
 
+        $this->middlewares = new StorageMiddlewareImpl();
+
     }
 
 
     function start()
     {
-     
+
         $this->providers()->register();
-     
+
         $request = $this->components()->make(Request::class);
-     
+
         $location = $this->components()->make(Location::class);
-     
+
         return $location->location($request->uri());
     }
 
@@ -71,5 +80,10 @@ class App implements Contract
         return $this->providers;
     }
 
+
+    function middlewares():StorageMiddleware
+    {
+        return $this->middlewares;
+    }
 
 }

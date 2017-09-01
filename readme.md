@@ -1,5 +1,6 @@
 
 # EFork
+
 # Composer install
 
 ```javascript
@@ -68,7 +69,7 @@ use Engine\Contracts\Middleware\Base;
 class IndexMiddleware implements Base
 {
 
-    public function handle(App $app)
+    public function handle()
     {
      
     }
@@ -90,7 +91,7 @@ class LocationProvider implements Base
     public function inject()
     {
         app()->components()->singleton(Interface::class, function () {
-            return new Implementation();
+            return new Implementation(app()->components()->make(Some::class));
         });
     }
 }
@@ -145,5 +146,9 @@ $config = app()->configs()->get("database");
 
 
 ```
+
+# App
+
+use app() function for get access for app context;  
    
 

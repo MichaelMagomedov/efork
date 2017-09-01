@@ -12,6 +12,8 @@ use Engine\Implementations\Route\Storage as StorageRoutesImpl;
 
 use Engine\Implementations\Middleware\Storage as StorageMiddlewareImpl;
 
+use Engine\Implementations\Config\Storage as StorageConfigImpl;
+
 use Engine\Contracts\Component\Storage as StorageComponents;
 
 use Engine\Contracts\Provider\Storage as StorageProviders;
@@ -19,6 +21,8 @@ use Engine\Contracts\Provider\Storage as StorageProviders;
 use Engine\Contracts\Route\Storage as StorageRoutes;
 
 use Engine\Contracts\Middleware\Storage as StorageMiddleware;
+
+use Engine\Contracts\Config\Storage as StorageConfig;
 
 
 use \Engine\Contracts\App as Contract;
@@ -34,6 +38,8 @@ class App implements Contract
 
     private $middlewares;
 
+    private $configs;
+
 
     /**
      * App constructor.
@@ -42,19 +48,23 @@ class App implements Contract
     function __construct()
     {
 
-        $this->providers = new StorageProvidersImpl($this);
+        $this->providers = new StorageProvidersImpl();
 
-        $this->components = new StorageComponentsImpl($this);
+        $this->components = new StorageComponentsImpl();
 
         $this->routes = new StorageRoutesImpl();
 
         $this->middlewares = new StorageMiddlewareImpl();
+
+        $this->configs = new StorageConfigImpl();
 
     }
 
 
     function start()
     {
+
+        setApp($this);
 
         $this->providers()->register();
 
@@ -73,6 +83,11 @@ class App implements Contract
     function routes():StorageRoutes
     {
         return $this->routes;
+    }
+
+    function configs():StorageConfig
+    {
+        return $this->configs;
     }
 
     function providers():StorageProviders

@@ -1,28 +1,16 @@
 <?php
 namespace Engine\Implementations\Route;
 
-use Engine\Contracts\App;
 use \Engine\Contracts\Route\Location as Contract;
 
 class Location implements Contract
 {
 
-
-    private $app;
-
-    /**
-     * Location constructor.
-     */
-    public function __construct(App $app)
-    {
-        $this->app = $app;
-    }
-
     public function location(string $url)
     {
         $method = $_SERVER['REQUEST_METHOD'];
 
-        $routes = $this->app->routes()->all($method);
+        $routes = app()->routes()->all($method);
 
         foreach ($routes as $regex => $route) {
 
@@ -30,11 +18,11 @@ class Location implements Contract
 
             if (preg_match($regex, $url, $routePart) == true) {
 
-                $middlewares = $this->app->middlewares()->getMidddlewares($method, $regex);
+                $middlewares = app()->middlewares()->getMidddlewares($method, $regex);
 
                 for ($i = 0; $i < sizeof($middlewares); $i++) {
 
-                    $middlewares[$i]->handle($this->app);
+                    $middlewares[$i]->handle();
 
                 }
 
@@ -48,7 +36,7 @@ class Location implements Contract
 
                 }
 
-                $controllerObj = (new \ReflectionClass($route->getController()))->newInstance($this->app);
+                $controllerObj = (new \ReflectionClass($route->getController()))->newInstance();
 
                 return call_user_func_array(array($controllerObj, $route->getMethod()), $variable);
 

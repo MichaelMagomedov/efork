@@ -87,10 +87,10 @@ $app->middlewares()->add("auth", \App\Middlewares\IndexMiddleware::class);
 class LocationProvider implements Base
 {
 
-    public function inject(App $app)
+    public function inject()
     {
-        $app->components()->singleton(Interface::class, function ($app) {
-            return new Implementation($app);
+        app()->components()->singleton(Interface::class, function () {
+            return new Implementation();
         });
     }
 }
@@ -109,16 +109,15 @@ $app->components()->make(SomeClass::class);
 
 ```javascript 
 
-use Engine\Implementations\App;
 
 class UserController
 {
 
-    private $app;
+   
 
-    public function __construct(App $app)
+    public function __construct()
     {
-        $this->app = $app;
+        
     }
 
     public function index($id)
@@ -126,6 +125,24 @@ class UserController
       --some code--
     }
 }
+
+```
+
+# Configs
+
+```javascript
+
+$app->configs()->add("database", [
+    "pdo" => "pgsql",
+    "user" => "postgres",
+    "password" => "asdasd123",
+    "database" => "universe",
+    "host" => "localhost",
+    "port" => "5432"
+]);
+
+$config = app()->configs()->get("database");
+
 
 ```
    

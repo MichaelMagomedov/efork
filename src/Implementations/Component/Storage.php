@@ -2,7 +2,6 @@
 
 namespace Engine\Implementations\Component;
 
-use Engine\Contracts\App;
 use \Engine\Contracts\Component\Storage as Contract;
 
 class Storage implements Contract
@@ -15,18 +14,13 @@ class Storage implements Contract
 
     ];
 
-    private $app;
-
     /**
      * Container constructor.
      * @param $app
      */
-    public function __construct(App $app)
+    public function __construct()
     {
-
-        $this->app = $app;
         $this->components[Contract::class] = $this;
-
     }
 
 
@@ -40,7 +34,7 @@ class Storage implements Contract
 
         } else {
 
-            return call_user_func($this->components[$asscoiation][$class],$this->app);
+            return call_user_func($this->components[$asscoiation][$class]);
 
         }
     }
@@ -54,7 +48,7 @@ class Storage implements Contract
     public function singleton(string $class, $function)
     {
         $this->association[$class] = "singleton";
-        $obj = $function($this->app);
+        $obj = $function();
         $this->components["singleton"][$class] = $obj;
     }
 

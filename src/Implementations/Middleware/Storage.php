@@ -2,7 +2,6 @@
 
 namespace Engine\Implementations\Middleware;
 
-use Engine\Contracts\App;
 use \Engine\Contracts\Middleware\Storage as Contract;
 
 class Storage implements Contract

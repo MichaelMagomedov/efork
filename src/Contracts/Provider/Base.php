@@ -6,5 +6,5 @@ use Engine\Contracts\App;
 
 interface Base
 {
-    public function inject(App $app);
+    public function inject();
 }

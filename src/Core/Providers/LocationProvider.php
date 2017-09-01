@@ -10,10 +10,10 @@ use Engine\Contracts\Route\Location;
 class LocationProvider implements Base
 {
 
-    public function inject(App $app)
+    public function inject()
     {
-        $app->components()->add(Location::class, function ($app) {
-            return new \Engine\Implementations\Route\Location($app);
+        app()->components()->add(Location::class, function () {
+            return new \Engine\Implementations\Route\Location();
         });
     }
 }

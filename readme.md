@@ -157,6 +157,18 @@ use app() function for get access for app context;
 
 ```javascript
 
+
+namespace App\Models;
+
+use Engine\Implementations\Models\Base;
+
+class User extends Base
+{
+
+    protected $table = "users";
+
+}
+
 $users = $user->row("SELECT id FROM users WHERE email = ?", [
             $user->getEmail()
 ]);
@@ -167,15 +179,17 @@ $users = $user->row("SELECT id FROM users WHERE email = ?", [
 
 ```javascript
 
-   $validateResult = $this->validator->validate([
-            "email" => "req",
-            "password" => "req|min{5}|max{12}",
-            "name" => "req|max{12}",
-   ]);
+validator get variable by name from request
+
+$validateResult = $this->validator->validate([
+        "email" => "req",
+        "password" => "req|min{5}|max{12}",
+        "name" => "req|max{12}",
+]);
    
-   if (!$validateResult) {
-            throw new \Exception("Ошибка данных");
-   }
+if (!$validateResult) {
+          throw new \Exception("Ошибка данных");
+}
 
 ```
 

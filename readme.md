@@ -181,6 +181,8 @@ $users = $user->row("SELECT id FROM users WHERE email = ?", [
 
 validator get variable by name from request
 
+$this->validator = app()->components()->make(Validator::class);
+
 $validateResult = $this->validator->validate([
         "email" => "req",
         "password" => "req|min{5}|max{12}",

@@ -72,7 +72,7 @@ class App implements Contract
 
         $location = $this->components()->make(Location::class);
 
-        return $location->location($request->url());
+        echo $location->location($request->url());
     }
 
     function components():StorageComponents

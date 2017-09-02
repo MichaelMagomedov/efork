@@ -3,12 +3,16 @@
 namespace Engine\Implementations\Models;
 
 use \Engine\Contracts\Models\Base as Contract;
+use JsonSerializable;
 use PDO;
 use PDOStatement;
 
-class Base implements Contract
+class Base implements Contract, JsonSerializable
+
 {
     protected $table;
+
+    protected $visiable;
 
     private $connect;
 
@@ -52,5 +56,24 @@ class Base implements Contract
         $result = $sth->fetchAll();
 
         return $result;
+    }
+
+    /**
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     * @since 5.4.0
+     */
+    function jsonSerialize()
+    {
+        $jsonArr = [];
+        foreach ($this->visiable as $fieldName) {
+
+            $methodName = "get" . ucwords(strtolower($fieldName));
+            $jsonArr[$fieldName] = call_user_func_array(array($this, $methodName), []);
+
+        }
+        return $jsonArr;
     }
 }

@@ -167,6 +167,8 @@ class User extends Base
 
     protected $table = "users";
 
+    protected $visiable = ["name", "email", "id"];
+
 }
 
 $users = $user->row("SELECT id FROM users WHERE email = ?", [

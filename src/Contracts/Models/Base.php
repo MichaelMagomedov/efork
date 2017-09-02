@@ -6,5 +6,5 @@ use PDOStatement;
 
 interface Base
 {
-    public function row(string $query, array $fields = null):PDOStatement;
+    public function row(string $query, array $fields = null):array;
 }

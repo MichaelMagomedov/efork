@@ -28,7 +28,7 @@ class Base implements Contract
     }
 
 
-    public function row(string $query, array $fields = null):PDOStatement
+    public function row(string $query, array $fields = null):array
     {
 
         for ($i = 0; $i < sizeof($fields); $i++) {
@@ -37,8 +37,20 @@ class Base implements Contract
 
         }
 
-        $query = vsprintf(str_replace(array('%', '?'), array('%%', '%s'), $query), $fields);
+        $query = vsprintf(str_replace(array('%', '?'), array("'%%'", "'%s'"), $query), $fields);
 
-        return $this->connect->query($query);
+
+        $sth = $this->connect->prepare($query);
+        $sth->execute();
+
+
+        if ($sth === false) {
+
+            throw new \Exception("SQL invalid");
+        }
+
+        $result = $sth->fetchAll();
+
+        return $result;
     }
 }

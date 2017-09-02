@@ -14,6 +14,8 @@ class Request implements Contract
         if (isset($_GET[$string])) {
             return $_GET[$string];
         }
+
+        return "";
     }
 
     public function url():string

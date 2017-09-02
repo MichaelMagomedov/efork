@@ -37,10 +37,12 @@
     use Engine\Core\Providers\LocationProvider;
     use Engine\Core\Providers\RequestProvider;
     use Engine\Implementations\App;
-
+    use \Engine\Core\Providers\ValidatorProvider;
+    
     $app = new App();
     $app->providers()->add(RequestProvider::class);
     $app->providers()->add(LocationProvider::class);
+    $app->providers()->add(ValidatorProvider::class);
 
     $app->start();
 
@@ -150,5 +152,32 @@ $config = app()->configs()->get("database");
 # App
 
 use app() function for get access for app context;  
+
+# Models
+
+```javascript
+
+$users = $user->row("SELECT id FROM users WHERE email = ?", [
+            $user->getEmail()
+]);
+
+```
+
+# validation
+
+```javascript
+
+   $validateResult = $this->validator->validate([
+            "email" => "req",
+            "password" => "req|min{5}|max{12}",
+            "name" => "req|max{12}",
+   ]);
+   
+   if (!$validateResult) {
+            throw new \Exception("Ошибка данных");
+   }
+
+```
+
    
 

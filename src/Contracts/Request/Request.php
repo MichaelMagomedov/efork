@@ -3,7 +3,7 @@ namespace Engine\Contracts\Request;
 
 interface Request
 {
-    public function input(string $string):string;
+    public function input(string $string);
 
     public function all():array;
 

@@ -5,7 +5,7 @@ use \Engine\Contracts\Request\Request as Contract;
 
 class Request implements Contract
 {
-    public function input(string $string):string
+    public function input(string $string)
     {
         if (isset($_POST[$string])) {
             return $_POST[$string];
@@ -17,7 +17,10 @@ class Request implements Contract
 
         $object = json_decode(file_get_contents("php://input"));
 
-        return $object->$string;
+        if (isset($object->$string)) {
+            return $object->$string;
+        }
+        return null;
     }
 
     public function url():string

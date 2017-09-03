@@ -64,6 +64,8 @@ class App implements Contract
     function start()
     {
 
+        session_start();
+        
         setApp($this);
 
         $this->providers()->register();

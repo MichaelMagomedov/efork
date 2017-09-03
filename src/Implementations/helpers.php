@@ -92,3 +92,12 @@ function abort($statusCode, $text = null)
     }
     exit($text);
 }
+
+function session($key, $value = null)
+{
+    if (isset($value)) {
+        $_SESSION[$key] = $value;
+    } else {
+        return $_SESSION[$key];
+    };
+}

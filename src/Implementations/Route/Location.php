@@ -50,8 +50,7 @@ class Location implements Contract
             }
         }
 
-        throw new \Exception("Method not allowed");
-
+        abort(500, 'Method not allowed');
 
     }
 

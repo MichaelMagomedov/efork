@@ -90,6 +90,7 @@ function abort($statusCode, $text = null)
         $status_string = $statusCode . ' ' . $status_codes[$statusCode];
         header($_SERVER['SERVER_PROTOCOL'] . ' ' . $status_string, true, $statusCode);
     }
+
     exit($text);
 }
 

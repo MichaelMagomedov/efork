@@ -98,6 +98,10 @@ function session($key, $value = null)
     if (isset($value)) {
         $_SESSION[$key] = $value;
     } else {
-        return $_SESSION[$key];
+        if (isset($_SESSION[$key])) {
+            return $_SESSION[$key];
+        } else {
+            return null;
+        }
     };
 }

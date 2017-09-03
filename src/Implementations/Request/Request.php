@@ -15,7 +15,9 @@ class Request implements Contract
             return $_GET[$string];
         }
 
-        return "";
+        $object = json_decode(file_get_contents("php://input"));
+
+        return $object->$string;
     }
 
     public function url():string

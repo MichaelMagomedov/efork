@@ -38,8 +38,15 @@ class Location implements Contract
 
                 $controllerObj = (new \ReflectionClass($route->getController()))->newInstance();
 
-                return call_user_func_array(array($controllerObj, $route->getMethod()), $variable);
+                try {
 
+                    return call_user_func_array(array($controllerObj, $route->getMethod()), $variable);
+
+                } catch (\Exception $e) {
+
+                    abort(500, $e);
+
+                }
             }
         }
 

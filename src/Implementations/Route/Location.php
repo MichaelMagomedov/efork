@@ -44,13 +44,14 @@ class Location implements Contract
 
                 } catch (\Exception $e) {
 
-                    abort(500, $e);
+
+                    abort(500, $e->getMessage());
 
                 }
             }
         }
 
-        abort(500, 'Method not allowed');
+        abort(404, 'Method not allowed');
 
     }
 

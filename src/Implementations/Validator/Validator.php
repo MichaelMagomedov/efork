@@ -23,7 +23,15 @@ class Validator implements Contract
             return strlen($obj) < $length;
         };
 
+        $this->associate["email"] = function (string $obj, int $length) {
+            if (preg_match(
+                    '/^((([0-9A-Za-z]{1}[-0-9A-z\.]{1,}[0-9A-Za-z]{1})|([0-9А-Яа-я]{1}[-0-9А-я\.]{1,}[0-9А-Яа-я]{1}))@([-0-9A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/u', $obj) == 1
+            )
+                return true;
 
+            return false;
+        };
+        
         $this->associate["max"] = function (string $obj, int $length) {
             return strlen($obj) > $length;
         };
